@@ -13,11 +13,11 @@ void convert_to_lowercase(char *str) {
 
 int valid_choice(const char* choice) {
     char tmp[32];
-    strcpy(tmp,choice);
+    strncpy(tmp,choice,sizeof(tmp));
     convert_to_lowercase(tmp);
     if (tmp == NULL) return 0;
 
-    if (strcmp(tmp, "Rock") == 0 || strcmp(tmp, "Paper") == 0 || strcmp(tmp, "Scissors") == 0) {
+    if (strcmp(tmp, "rock") == 0 || strcmp(tmp, "paper") == 0 || strcmp(tmp, "scissors") == 0) {
         return 1;
     }
     // Accept numeric choices as strings: "0", "1", "2"
@@ -31,20 +31,23 @@ int computer_choice() {
     return rand() % 3; // Random choice between 0 (Rock), 1 (Paper), 2 (Scissors)
 }
 int main(){
-    char* user_choice[10];    
+    char user_choice[32];    
     printf("Enter your choice: ");
     // Waits for valid input from user.
     while (1) {
-        scanf("%*s", user_choice);
-        if (!valid_choice(*user_choice)) {
-            printf("Invalid choice. Please enter Rock, Paper, or Scissors: ");
-        } else {
-            printf("You chose: %s\n", *user_choice);
-            break;
-        }
+        if (scanf("%31s", user_choice) != 1){
+            if (!valid_choice(user_choice)) {
+                printf("Invalid choice. Please enter Rock, Paper, or Scissors: ");
+        }   else {
+                printf("You chose: %s\n", *user_choice);
+                break;
+        }}
+        else {
+            printf("Must enter valid input");
+
     }
     int computers_pick = computer_choice();
 
     return 0;
 
-}
+}}
