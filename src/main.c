@@ -15,13 +15,13 @@ int valid_choice(const char* choice) {
     char tmp[32];
     strcpy(tmp,choice);
     convert_to_lowercase(tmp);
-    if (choice == NULL) return 0;
+    if (tmp == NULL) return 0;
 
-    if (strcmp(choice, "Rock") == 0 || strcmp(choice, "Paper") == 0 || strcmp(choice, "Scissors") == 0) {
+    if (strcmp(tmp, "Rock") == 0 || strcmp(tmp, "Paper") == 0 || strcmp(tmp, "Scissors") == 0) {
         return 1;
     }
     // Accept numeric choices as strings: "0", "1", "2"
-    if (strlen(choice) == 1 && (choice[0] == '0' || choice[0] == '1' || choice[0] == '2')) {
+    if (strlen(tmp) == 1 && (tmp[0] == '0' || tmp[0] == '1' || tmp[0] == '2')) {
         return 1;
     }
 
