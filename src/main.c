@@ -1,9 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
 enum Choices { Rock, Paper, Scissors };
+void convert_to_lowercase(char *str) {
+    
+    for (int i = 0; str[i] != '\0'; i++) {
+        str[i] = (char)tolower((unsigned char)str[i]);
+    }
+}
 
 
 int valid_choice(const char* choice) {
+    char tmp[32];
+    strcpy(tmp,choice);
+    convert_to_lowercase(tmp);
     if (choice == NULL) return 0;
 
     if (strcmp(choice, "Rock") == 0 || strcmp(choice, "Paper") == 0 || strcmp(choice, "Scissors") == 0) {
