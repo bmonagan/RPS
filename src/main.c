@@ -46,6 +46,7 @@ int main(){
     // Waits for valid input from user.
     while (1) {
         if (scanf("%31s", user_choice) == 1){
+            clear_input_buffer();
             if (!valid_choice(user_choice)) {
                 printf("Invalid choice. Please enter Rock, Paper, or Scissors: ");
         }   else {
@@ -53,6 +54,7 @@ int main(){
                 break;
         }}
         else {
+            clear_input_buffer();
             printf("Must enter valid input");
             
             
