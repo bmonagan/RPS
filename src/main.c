@@ -56,12 +56,6 @@ int main(){
         else {
             clear_input_buffer();
             printf("Must enter valid input");
-            
-            
-
-    }
+        }}
     int computers_pick = computer_choice();
-
-    return 0;
-
-}}
+    return 0;}
