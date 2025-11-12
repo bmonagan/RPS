@@ -50,7 +50,7 @@ int main(){
             if (!valid_choice(user_choice)) {
                 printf("Invalid choice. Please enter Rock, Paper, or Scissors: ");
         }   else {
-                printf("You chose: %s\n", *user_choice);
+                printf("You chose: %s\n", user_choice);
                 break;
         }}
         else {
