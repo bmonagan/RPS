@@ -9,12 +9,21 @@ void convert_to_lowercase(char *str) {
         str[i] = (char)tolower((unsigned char)str[i]);
     }
 }
+void clear_input_buffer() {
+    int c;
+    // Read characters one by one until a newline or EOF is encountered
+    while ((c = getchar()) != '\n' && c != EOF) {
+        // Discard the character; the loop condition handles the reading
+        continue; 
+    }
+}
 
 
 int valid_choice(const char* choice) {
     if (choice == NULL) return 0;
     char tmp[32];
     strncpy(tmp,choice,sizeof(tmp));
+    tmp[sizeof(tmp) - 1] = '\0';
     convert_to_lowercase(tmp);
     
 
@@ -36,7 +45,7 @@ int main(){
     printf("Enter your choice: ");
     // Waits for valid input from user.
     while (1) {
-        if (scanf("%31s", user_choice) != 1){
+        if (scanf("%31s", user_choice) == 1){
             if (!valid_choice(user_choice)) {
                 printf("Invalid choice. Please enter Rock, Paper, or Scissors: ");
         }   else {
@@ -45,6 +54,8 @@ int main(){
         }}
         else {
             printf("Must enter valid input");
+            
+            
 
     }
     int computers_pick = computer_choice();
