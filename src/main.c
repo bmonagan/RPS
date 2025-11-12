@@ -12,10 +12,11 @@ void convert_to_lowercase(char *str) {
 
 
 int valid_choice(const char* choice) {
+    if (choice == NULL) return 0;
     char tmp[32];
     strncpy(tmp,choice,sizeof(tmp));
     convert_to_lowercase(tmp);
-    if (tmp == NULL) return 0;
+    
 
     if (strcmp(tmp, "rock") == 0 || strcmp(tmp, "paper") == 0 || strcmp(tmp, "scissors") == 0) {
         return 1;
