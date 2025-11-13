@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
+#include <time.h>
 enum Choices { Rock, Paper, Scissors };
 void convert_to_lowercase(char *str) {
     
