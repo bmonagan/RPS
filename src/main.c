@@ -19,9 +19,9 @@ void clear_input_buffer() {
 }
 const char* choice_to_string(enum Choices choice) {
     switch (choice) {
-        case Rock: return "Rock";
-        case Paper: return "Paper";
-        case Scissors: return "Scissors";
+        case Rock: return "rock";
+        case Paper: return "paper";
+        case Scissors: return "scissors";
         default: return "Unknown Choice";
     }
 }
@@ -48,6 +48,15 @@ int valid_choice(const char* choice) {
 int computer_choice() {
     return rand() % 3; // Random choice between 0 (Rock), 1 (Paper), 2 (Scissors)
 }
+int validate_win(char* user_choice, char* comp_pick){
+    if (comp_pick == user_choice){
+        return 2;
+    } else if ((user_choice == "rock" && comp_pick == "scissors") || (user_choice == "scissors" && comp_pick == "paper") || (user_choice == "paper" && comp_pick == "rock")){
+        return 0;
+    } else {
+        return 1;
+    }
+}
 int main(){
     char user_choice[32];    
     printf("Enter your choice: ");
@@ -70,10 +79,10 @@ int main(){
     const char* string_pick = choice_to_string(comp_pick);
     printf("Computer's choice: %s\n", string_pick);
 
-    if (validate_win == true){
+    if (validate_win == 0){
         printf("%s beats %s\n", user_choice, string_pick);
         printf("Congratulations! You Won!");
-    } else if (validate_win == false){
+    } else if (validate_win == 1){
         printf("%s beats %s\n", string_pick, user_choice);
         printf("Try again next time. You lost.");
 
