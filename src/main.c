@@ -48,7 +48,6 @@ int valid_choice(const char* choice) {
 int computer_choice() {
     return rand() % 3; // Random choice between 0 (Rock), 1 (Paper), 2 (Scissors)
 }
-#include <string.h> // <-- **MUST INCLUDE THIS HEADER**
 
 int validate_win(const char* user_choice, const char* comp_pick){
     if (strcmp(comp_pick, user_choice) == 0){
@@ -69,7 +68,7 @@ int validate_win(const char* user_choice, const char* comp_pick){
     }
 }
 int main(){
-    // 💡 Initialize the random number generator
+    // Initialize the random number generator
     srand(time(NULL));
     char user_choice[32];    
     printf("Enter your choice: ");
