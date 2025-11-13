@@ -32,7 +32,7 @@ int valid_choice(const char* choice) {
     char tmp[32];
     strncpy(tmp,choice,sizeof(tmp));
     tmp[sizeof(tmp) - 1] = '\0';
-    convert_to_lowercase(tmp);
+    
     
 
     if (strcmp(tmp, "rock") == 0 || strcmp(tmp, "paper") == 0 || strcmp(tmp, "scissors") == 0) {
@@ -48,12 +48,23 @@ int valid_choice(const char* choice) {
 int computer_choice() {
     return rand() % 3; // Random choice between 0 (Rock), 1 (Paper), 2 (Scissors)
 }
-int validate_win(char* user_choice, char* comp_pick){
-    if (comp_pick == user_choice){
-        return 2;
-    } else if ((user_choice == "rock" && comp_pick == "scissors") || (user_choice == "scissors" && comp_pick == "paper") || (user_choice == "paper" && comp_pick == "rock")){
-        return 0;
+#include <string.h> // <-- **MUST INCLUDE THIS HEADER**
+
+int validate_win(const char* user_choice, const char* comp_pick){
+    if (strcmp(comp_pick, user_choice) == 0){
+        // Return 2 for Tie
+        return 2; 
+
+    } else if (
+        (strcmp(user_choice, "rock") == 0 && strcmp(comp_pick, "scissors") == 0) || 
+        (strcmp(user_choice, "scissors") == 0 && strcmp(comp_pick, "paper") == 0) || 
+        (strcmp(user_choice, "paper") == 0 && strcmp(comp_pick, "rock") == 0)
+    ) {
+        // Return 0 for Win
+        return 0; 
+    // All other cases are a Loss (Computer wins)
     } else {
+        // Return 1 for Loss
         return 1;
     }
 }
@@ -64,6 +75,7 @@ int main(){
     while (1) {
         if (scanf("%31s", user_choice) == 1){
             clear_input_buffer();
+            convert_to_lowercase(user_choice);
             if (!valid_choice(user_choice)) {
                 printf("Invalid choice. Please enter Rock, Paper, or Scissors: ");
         }   else {
@@ -78,11 +90,11 @@ int main(){
     enum Choices comp_pick = (enum Choices) computers_index;
     const char* string_pick = choice_to_string(comp_pick);
     printf("Computer's choice: %s\n", string_pick);
-
-    if (validate_win == 0){
+    int outcome = validate_win(user_choice, string_pick);
+    if (outcome == 0){
         printf("%s beats %s\n", user_choice, string_pick);
         printf("Congratulations! You Won!");
-    } else if (validate_win == 1){
+    } else if (outcome == 1){
         printf("%s beats %s\n", string_pick, user_choice);
         printf("Try again next time. You lost.");
 
