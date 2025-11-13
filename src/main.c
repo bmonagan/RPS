@@ -67,5 +67,6 @@ int main(){
         }}
     int computers_index = computer_choice();
     enum Choices comp_pick = (enum Choices) computers_index;
-    printf("%s", choice_to_string(comp_pick));
+    const char* string_pick = choice_to_string(comp_pick);
+    printf("%s", string_pick);
     return 0;}
