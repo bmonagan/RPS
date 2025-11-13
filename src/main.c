@@ -68,5 +68,20 @@ int main(){
     int computers_index = computer_choice();
     enum Choices comp_pick = (enum Choices) computers_index;
     const char* string_pick = choice_to_string(comp_pick);
-    printf("%s", string_pick);
-    return 0;}
+    printf("Computer's choice: %s\n", string_pick);
+
+    if (validate_win == true){
+        printf("%s beats %s\n", user_choice, string_pick);
+        printf("Congratulations! You Won!");
+    } else if (validate_win == false){
+        printf("%s beats %s\n", string_pick, user_choice);
+        printf("Try again next time. You lost.");
+
+    } else {
+        printf("Both players chose %s\n", user_choice);
+        printf("The game is a draw");
+    }
+    
+
+    return 0;
+}
