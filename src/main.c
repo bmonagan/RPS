@@ -17,6 +17,14 @@ void clear_input_buffer() {
         continue; 
     }
 }
+const char* choice_to_string(enum Choices choice) {
+    switch (choice) {
+        case Rock: return "Rock";
+        case Paper: return "Paper";
+        case Scissors: return "Scissors";
+        default: return "Unknown Choice";
+    }
+}
 
 
 int valid_choice(const char* choice) {
@@ -57,5 +65,7 @@ int main(){
             clear_input_buffer();
             printf("Must enter valid input");
         }}
-    int computers_pick = computer_choice();
+    int computers_index = computer_choice();
+    enum Choices comp_pick = (enum Choices) computers_index;
+    printf("%s", choice_to_string(comp_pick));
     return 0;}
