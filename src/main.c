@@ -78,6 +78,7 @@ int main(){
             if (!valid_choice(user_choice)) {
                 printf("Invalid choice. Please enter Rock, Paper, or Scissors: ");
         }   else {
+                #TODO currently not working with the number inputs.
                 if (strlen(user_choice) == 1) {
                     if (user_choice[0] == '0') {
                         strcpy(user_choice, "rock");
