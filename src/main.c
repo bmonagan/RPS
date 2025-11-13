@@ -31,19 +31,20 @@ const char* choice_to_string(enum Choices choice) {
 int valid_choice(const char* choice) {
     if (choice == NULL) return 0;
     char tmp[32];
-    strncpy(tmp,choice,sizeof(tmp));
+    strncpy(tmp, choice, sizeof(tmp) - 1);
     tmp[sizeof(tmp) - 1] = '\0';
+    convert_to_lowercase(tmp);
     
-    
-
+    // Check for word choices
     if (strcmp(tmp, "rock") == 0 || strcmp(tmp, "paper") == 0 || strcmp(tmp, "scissors") == 0) {
         return 1;
     }
-    // Accept numeric choices as strings: "0", "1", "2"
+    
+    // Check for numeric choices: "0", "1", "2"
     if (strlen(tmp) == 1 && (tmp[0] == '0' || tmp[0] == '1' || tmp[0] == '2')) {
         return 1;
     }
-
+    
     return 0;
 }
 int computer_choice() {
@@ -71,13 +72,14 @@ int validate_win(const char* user_choice, const char* comp_pick){
 int main(){
     // Initialize the random number generator
     srand(time(NULL));
-    char user_choice[32];    
+    char user_choice[32];
+    printf("Valid choices are: Rock, Paper, Scissors and 0,1,2 to represent them in that order\n");   
     printf("Enter your choice: ");
     // Waits for valid input from user.
     while (1) {
         if (scanf("%31s", user_choice) == 1){
             clear_input_buffer();
-            convert_to_lowercase(user_choice);
+            
             if (!valid_choice(user_choice)) {
                 printf("Invalid choice. Please enter Rock, Paper, or Scissors: ");
         }   else {
@@ -88,6 +90,19 @@ int main(){
             clear_input_buffer();
             printf("Must enter valid input");
         }}
+    convert_to_lowercase(user_choice);
+
+    // If user entered a numeric choice ("0","1","2"), convert it to the
+    // corresponding word so later string comparisons work uniformly.
+    if (strlen(user_choice) == 1) {
+        if (user_choice[0] == '0') {
+            strcpy(user_choice, "rock");
+        } else if (user_choice[0] == '1') {
+            strcpy(user_choice, "paper");
+        } else if (user_choice[0] == '2') {
+            strcpy(user_choice, "scissors");
+        }
+    }
     int computers_index = computer_choice();
     enum Choices comp_pick = (enum Choices) computers_index;
     const char* string_pick = choice_to_string(comp_pick);
